@@ -12,7 +12,7 @@ def encrypt(msg, key):
 def decrypt(cipher, key):
 	msg = ""
 
-	inverse_key = {v: k for k, v in map.items()}
+	inverse_key = {v: k for k, v in key.items()}
 
 	for letter in cipher:
 		if letter in inverse_key:
