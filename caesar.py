@@ -1,26 +1,11 @@
-def encrypt(msg, key):
-	cipher = ""	
+import substitution
 
-	for letter in msg:
-		if letter in key:
-			cipher += key[letter]
-		else:
-			cipher += letter
 
-	return cipher
+def encrypt(key, msg):
+	return substitution.encrypt(key, msg) 
 
-def decrypt(cipher, key):
-	msg = ""
-
-	inverse_key = {v: k for k, v in key.items()}
-
-	for letter in cipher:
-		if letter in inverse_key:
-			msg += inverse_key[letter]
-		else:
-			msg += letter
-
-	return msg
+def decrypt(key, cipher):
+	return substitution.decrypt(key, cipher) 
 
 def gen_key(n):
 	key = {}
