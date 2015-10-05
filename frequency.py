@@ -1,5 +1,8 @@
+import operator
+
+
 def frequency_count(c, n):
-	c =  c.strip()
+	c =  c.replace(" ", "")
 
 	total = len(c) - (n - 1)
 	freq = {}
@@ -15,3 +18,13 @@ def frequency_count(c, n):
 		freq[f] = float(freq[f])/total		
 
 	return freq
+
+def display_table(freq):
+	print '_____________'
+
+	
+	sorted_freq = sorted(freq.items(), key=operator.itemgetter(1), reverse=True)
+
+	for f in sorted_freq:
+		print '| ' + f[0] + ' | %.4f |' % f[1]
+	
