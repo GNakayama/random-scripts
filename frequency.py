@@ -1,13 +1,22 @@
 import operator
 
+FREQUENCY = {}
 
-def frequency_count(c, n):
+FREQUENCY['en'] = [('E', 12.02), ('T', 9.10), ('A', 8.12),('O', 7.68), ('I', 7.31), ('N', 6.95), ('S', 6.28), ('R', 6.02), ('H', 5.92), ('D', 4.32), ('L', 3.98), ('U', 2.88), ('C', 2.71), ('M', 2.61), ('F', 2.30), ('Y', 2.11), ('W', 2.09), ('G', 2.03), ('P', 1.82), ('B', 1.49), ('V', 1.11), ('K', 0.69), ('X', 0.17), ('Q', 0.11), ('J', 0.10), ('Z', 0.07)]
+
+
+def frequency_count(c, n, jump=False):
 	c =  c.replace(" ", "")
 
 	total = len(c) - (n - 1)
 	freq = {}
+	step = 1
 	
-	for k in xrange(total):
+	if jump:
+		step = n
+		total = len(c)//n
+
+	for k in xrange(0, len(c), step):
 		word = c[k: (k + n)]
 		if word in freq:
 			freq[word] += 1
@@ -27,4 +36,12 @@ def display_table(freq):
 
 	for f in sorted_freq:
 		print '| ' + f[0] + ' | %.4f |' % f[1]
+
+def create_key_from_freq(freq, lang):
+	key = {}
+	sorted_freq = sorted(freq.items(), key=operator.itemgetter(1), reverse=True)
+
+	for i in xrange(len(FREQUENCY[lang])):
+		key[sorted_freq[i][0]] = FREQUENCY[lang][i][0]
 	
+	return key
